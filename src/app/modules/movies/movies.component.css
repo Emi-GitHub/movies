@@ -1,0 +1,25 @@
+.movie-description {
+  overflow: hidden;
+  max-height: 8rem;
+  -webkit-box-orient: vertical;
+  display: block;
+  display: -webkit-box;
+  overflow: hidden !important;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 4;
+}
+
+.card-body-custom {
+  max-height: 250px;
+}
+
+.img-custom {
+  height: 250px;
+  width: 200px;
+}
+
+@media (max-width: 767.98px) {
+  .movie-description {
+    -webkit-line-clamp: 2;
+  }
+}

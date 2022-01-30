@@ -1,0 +1,7 @@
+.bg-primary {
+  background-color: var(--color-primary) !important;
+}
+
+.back-link:hover {
+  color: var(--color-primary) !important;
+}

@@ -1,0 +1,50 @@
+<div class="display-5 text-center pt-3 pb-3">List of all movies</div>
+<ol class="container list-group pb-3 ps-3">
+  <a
+    [routerLink]="['/']"
+    (click)="onBackClick()"
+    class="text-decoration-none text-dark mb-3 back-link"
+    >&larr; Go back
+  </a>
+  <ng-container *ngFor="let movie of rating | async; index as i">
+    <li
+      class="list-group-item d-flex justify-content-between align-items-center"
+    >
+      <div class="ms-1 me-auto">
+        <div class="d-flex justify-content-between align-items-center">
+          <img
+            src="https://source.unsplash.com/random/{{ i }}"
+            width="50px"
+            height="70px"
+          />
+          <div class="d-flex flex-column ms-2">
+            <div class="fw-bold link-dark text-decoration-none">
+              {{ i + 1 }}. {{ movie["title"] }}
+            </div>
+            <small class="text-muted"
+              >{{ movie["release_date"] | date }}
+            </small>
+            <div class="d-flex">
+              Your rate:
+              <span class="ms-2">
+                <ngx-stars
+                  [readonly]="false"
+                  [initialStars]="0"
+                  [maxStars]="5"
+                  (ratingOutput)="onRatingSet($event, movie['id'])"
+                ></ngx-stars
+              ></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div>
+          <span class="badge bg-primary rounded-pill">{{
+            movie["vote_average"] | number: "1.1-1"
+          }}</span>
+        </div>
+      </div>
+    </li>
+  </ng-container>
+</ol>
