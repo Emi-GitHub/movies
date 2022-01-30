@@ -1,0 +1,35 @@
+<div class="mx-auto mt-2 container search-container">
+  <div class="input-group">
+    <input
+      minlength="2"
+      class="form-control border-end-0 border rounded-pill"
+      type="text"
+      placeholder="Search..."
+      [(ngModel)]="term"
+      (input)="onSearchSubmit(searchTerm.value)"
+      [ngClass]="{ 'validate-input': term.length <= 2 }"
+      #searchTerm
+    />
+  </div>
+</div>
+<div class="container d-flex justify-content-center mt-4">
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a
+        class="nav-link"
+        aria-current="page"
+        (click)="changeType('movies')"
+        [ngClass]="{ active: togglerModel === 'movies' }"
+        >Movies</a
+      >
+    </li>
+    <li class="nav-item">
+      <a
+        class="nav-link"
+        (click)="changeType('shows')"
+        [ngClass]="{ active: togglerModel === 'shows' }"
+        >Shows</a
+      >
+    </li>
+  </ul>
+</div>

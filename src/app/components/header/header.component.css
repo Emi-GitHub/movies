@@ -1,0 +1,18 @@
+.search-container {
+  max-width: 500px;
+}
+
+.validate-input:focus {
+  box-shadow: 0 0 0 0.25rem rgb(217 83 79 / 25%);
+}
+
+.nav-link {
+  color: #000;
+}
+
+.nav-tabs .nav-link.active,
+.nav-tabs .nav-item.show .nav-link {
+  color: #fff;
+  background-color: #000;
+  border-color: #dee2e6 #dee2e6 #fff;
+}

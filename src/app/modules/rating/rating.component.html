@@ -29,12 +29,14 @@
               <span class="ms-2">
                 <ngx-stars
                   [readonly]="false"
-                  [initialStars]="0"
+                  [initialStars]="initialRate"
                   [maxStars]="5"
                   (ratingOutput)="onRatingSet($event, movie['id'])"
+                  [color]="'#20b2aa'"
                 ></ngx-stars
               ></span>
             </div>
+            Number of rates: {{ movie["vote_count"] }}
           </div>
         </div>
       </div>

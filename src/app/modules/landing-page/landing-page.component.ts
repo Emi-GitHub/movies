@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { HeaderComponent } from 'src/app/components/header/header.component';
 import { MoviesService } from 'src/app/services/movies.service';
 import { ShowsService } from 'src/app/services/shows.service';
 
@@ -17,6 +18,8 @@ export class LandingPageComponent implements OnInit {
   loadMoreShows = false;
   loadMoreCounterShows = 10;
   term = '';
+
+  @ViewChild('toggler') toggler: HeaderComponent;
 
   constructor(
     private movieService: MoviesService,
@@ -97,25 +100,25 @@ export class LandingPageComponent implements OnInit {
     this.router.navigate(['/rating']);
   }
 
-  onSearchMovies(event: any) {
-    this.term = event.target.value;
-    if (event.target.value.length <= 2) {
+  onSearchMovies(value: any) {
+    this.term = value;
+    if (value.length <= 2) {
       this.movies = [];
       this.getMovies();
       return;
     }
     this.movies = [];
-    this.searchMovies(event.target.value);
+    this.searchMovies(value);
   }
 
-  onSearchShows(event: any) {
-    this.term = event.target.value;
-    if (event.target.value.length <= 2) {
+  onSearchShows(value: any) {
+    this.term = value;
+    if (value.length <= 2) {
       this.shows = [];
       this.getShows();
       return;
     }
     this.shows = [];
-    this.searchShows(event.target.value);
+    this.searchShows(value);
   }
 }

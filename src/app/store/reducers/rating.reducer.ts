@@ -125,13 +125,17 @@ export function RatingReducer(
     case RatingActionTypes.EDIT_RATE:
       return state.map((el, i) => {
         if (el.id === action.id) {
-          console.log(el.id);
+          const newVoteCount = initialState[i].vote_count + 1;
           const newAverage =
             (initialState[i].vote_average * initialState[i].vote_count +
               action.value) /
             (initialState[i].vote_count + 1);
-          console.log(newAverage);
-          return Object.assign({}, el, { vote_average: newAverage });
+          return Object.assign(
+            {},
+            el,
+            { vote_average: newAverage },
+            { vote_count: newVoteCount }
+          );
         }
         return el;
       });

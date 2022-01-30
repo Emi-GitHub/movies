@@ -1,70 +1,11 @@
-<!--SEARCH BAR FOR MOVIES-->
-<ng-container *ngIf="togglerModel === 'movies'" class="container">
-  <div class="mx-auto mt-2 container search-container">
-    <div class="input-group">
-      <input
-        minlength="2"
-        class="form-control border-end-0 border rounded-pill"
-        type="text"
-        placeholder="Search..."
-        (input)="onSearchMovies($event)"
-        [ngClass]="{ 'validate-input': term.length <= 2 }"
-      />
-    </div>
-  </div>
-</ng-container>
-
-<!--SEARCH BAR FOR SHOWS-->
-<ng-container *ngIf="togglerModel === 'shows'" class="container">
-  <div class="container mx-auto mt-2 search-container">
-    <div class="input-group">
-      <input
-        minlength="2"
-        class="form-control border-end-0 border rounded-pill"
-        type="text"
-        placeholder="Search..."
-        (input)="onSearchShows($event)"
-        [ngClass]="{ 'validate-input': term.length <= 2 }"
-      />
-    </div>
-  </div>
-</ng-container>
-
-<!--TOGGLER-->
-<div class="mt-3">
-  <div
-    class="d-flex justify-content-center"
-    [(ngModel)]="togglerModel"
-    name="toggler"
-    ngDefaultControl
-  >
-    <div class="form-check form-check-inline d-flex align-items-center">
-      <input
-        class="form-check-input"
-        type="radio"
-        name="toggler"
-        id="movies"
-        value="movies"
-        checked
-      />
-      <label class="form-check-label fs-4 ms-2" for="movies"> Movies </label>
-    </div>
-    <div class="form-check form-check-inline d-flex align-items-center ms-3">
-      <input
-        class="form-check-input"
-        type="radio"
-        name="toggler"
-        id="shows"
-        value="shows"
-      />
-      <label class="form-check-label fs-4 ms-2" for="shows"> TV Shows </label>
-    </div>
-  </div>
-</div>
+<app-header
+  (onSearchMovies)="onSearchMovies($event)"
+  (onSearchShows)="onSearchShows($event)"
+  #toggler
+></app-header>
 
 <!--MOVIES-->
-<ng-container *ngIf="togglerModel === 'movies'">
-  <!--RATING-->
+<ng-container *ngIf="toggler.togglerModel === 'movies'">
   <div class="d-flex align-items-center container pt-2 pb-2">
     <i
       class="fas fa-star d-md-block d-none fa-2x star-icon"
@@ -82,7 +23,7 @@
       <ng-container
         *ngIf="(i < loadMoreCounterMovies && !loadMoreMovies) || loadMoreMovies"
       >
-        <app-movies
+        <app-movie-details
           [i]="i"
           [title]="movie['title']"
           [desc]="movie['overview']"
@@ -90,7 +31,7 @@
           [actors]="movie['genre_ids']"
           [vote]="movie['vote_average']"
           [cover]="'https://source.unsplash.com/random?movie/'"
-        ></app-movies>
+        ></app-movie-details>
       </ng-container>
     </ng-container>
     <div
@@ -105,13 +46,13 @@
 </ng-container>
 
 <!--TV SHOWS-->
-<ng-container *ngIf="togglerModel === 'shows'">
+<ng-container *ngIf="toggler.togglerModel === 'shows'">
   <div class="container mt-3" *ngIf="shows.length">
     <ng-container *ngFor="let show of shows; index as i">
       <ng-container
         *ngIf="(i < loadMoreCounterShows && !loadMoreShows) || loadMoreShows"
       >
-        <app-movies
+        <app-movie-details
           [i]="i"
           [title]="show['name']"
           [desc]="show['overview']"
@@ -119,7 +60,7 @@
           [actors]="show['genre_ids']"
           [vote]="show['vote_average']"
           [cover]="'https://source.unsplash.com/random?poster/'"
-        ></app-movies>
+        ></app-movie-details>
       </ng-container>
     </ng-container>
     <div
