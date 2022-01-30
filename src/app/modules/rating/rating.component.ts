@@ -17,6 +17,7 @@ export class RatingComponent implements OnInit {
   constructor(private router: Router, private store: Store<AppState>) {}
 
   ngOnInit(): void {
+    //here I would call API POST for rating movies
     this.rating = this.store.select('rating');
   }
 
