@@ -18,6 +18,7 @@ export class LandingPageComponent implements OnInit {
   loadMoreShows = false;
   loadMoreCounterShows = 10;
   term = '';
+  lastCharCounter: number = 0;
 
   @ViewChild('toggler') toggler: HeaderComponent;
 
@@ -100,25 +101,39 @@ export class LandingPageComponent implements OnInit {
     this.router.navigate(['/rating']);
   }
 
+  showInitialMovies() {
+    this.movies = [];
+    this.getMovies();
+  }
+
+  showInitialShows() {
+    this.shows = [];
+    this.getShows();
+  }
+
+  restartCounter() {
+    this.lastCharCounter = 0;
+  }
+
   onSearchMovies(value: any) {
     this.term = value;
-    if (value.length <= 2) {
+    if (value.length > 2) {
       this.movies = [];
-      this.getMovies();
-      return;
+      this.searchMovies(value);
+    } else if (this.lastCharCounter === 3 && value.length <= 2) {
+      this.showInitialMovies();
     }
-    this.movies = [];
-    this.searchMovies(value);
+    this.lastCharCounter = value.length;
   }
 
   onSearchShows(value: any) {
     this.term = value;
-    if (value.length <= 2) {
+    if (value.length > 2) {
       this.shows = [];
-      this.getShows();
-      return;
+      this.searchShows(value);
+    } else if (this.lastCharCounter === 3 && value.length <= 2) {
+      this.showInitialShows();
     }
-    this.shows = [];
-    this.searchShows(value);
+    this.lastCharCounter = value.length;
   }
 }

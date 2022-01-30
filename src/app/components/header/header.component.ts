@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -11,6 +11,9 @@ export class HeaderComponent implements OnInit {
 
   @Output() onSearchMovies = new EventEmitter<string>();
   @Output() onSearchShows = new EventEmitter<string>();
+  @Output() showInitialMovies = new EventEmitter();
+  @Output() showInitialShows = new EventEmitter();
+  @Output() restartCounter = new EventEmitter();
 
   constructor() {}
 
@@ -24,6 +27,8 @@ export class HeaderComponent implements OnInit {
   changeType(value: string) {
     this.term = '';
     this.togglerModel = value;
-    this.onSearchSubmit('');
+    if (this.togglerModel === 'movies') this.showInitialMovies.emit();
+    else if (this.togglerModel === 'shows') this.showInitialShows.emit();
+    this.restartCounter.emit();
   }
 }
